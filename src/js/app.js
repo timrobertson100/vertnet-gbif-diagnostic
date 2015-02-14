@@ -7,7 +7,7 @@ var nodes = angular.module('dataset', []);
 nodes.controller('DatasetController', ['$http', function($http) {
   var self = this;
 
-  var cdbAPI = 'http://vertnet.cartodb.com/api/v2/sql?q=SELECT%20gbifdatasetid,title,lastindexed,url,count,ipt%20FROM%20resource';
+  var cdbAPI = 'http://vertnet.cartodb.com/api/v2/sql?q=SELECT%20gbifdatasetid,title,lastindexed,url,count,ipt%20FROM%20resource ORDER BY title';
   var gbifAPI ='http://api.gbif.org/v1/occurrence/count?datasetKey=';
 
   self.datasets = [];
