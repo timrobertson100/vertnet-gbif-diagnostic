@@ -61,9 +61,11 @@
 	  var self = this;
 	
 	  var cdbAPI = "http://vertnet.cartodb.com/api/v2/sql?q=" +
-	   "SELECT orgname,gbifdatasetid,title,lastindexed,source_url,count,ipt " +
+	   "SELECT orgname,gbifdatasetid,title,lastindexed,source_url,count," +
+	     "url not like '%25ipt.vertnet.org%25' AS self " +
 	   "FROM resource " +
-	   "WHERE url NOT like '%25iptstrays%25' " + // encode % as %25
+	   "WHERE ipt=true AND url NOT like '%25iptstrays%25' " + // encode % as %25
+	   " AND title NOT LIKE '%25Subset of data for VERTNET%25' " +
 	   "ORDER BY orgname,title";
 	  var gbifAPI ="http://api.gbif.org/v1/occurrence/count?datasetKey=";
 	
@@ -75,14 +77,12 @@
 	    $http.get(cdbAPI).success(function (data) {
 	      self.datasets = data.rows;
 	
-	
-	
 	      // load each GBIF count
 	      angular.forEach(self.datasets, function(dataset) {
-	        console.log(dataset);
 	        $http.get(gbifAPI + dataset.gbifdatasetid).success(function (data) {
 	          dataset.gbifCount = data;
 	        });
+	        
 	      });
 	    });
 	  }
