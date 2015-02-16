@@ -23,6 +23,7 @@
       <div class="col-xs-12">
         <table class="table table-striped table-bordered table-condensed">
           <thead>
+            <th>Organization</th>
             <th>Title</th>
             <th>Last indexed (VN)</th>
             <th>Source</th>
@@ -31,6 +32,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="dataset in datasetCtlr.datasets">
+              <td>{{dataset.orgname}}</td>
               <td><a href="http://www.gbif.org/dataset/{{dataset.gbifdatasetid}}" target="_blank">{{dataset.title}}</a></td>
               <td>{{dataset.lastindexed}}</td>
               <td><a href="{{dataset.url}}" target="_blank">Source DwC-A</a></td>
